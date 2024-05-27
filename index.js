@@ -228,7 +228,7 @@ const authenticateJwt = (req, res, next) => {
   
   app.post('/SuperUser/login', async (req, res) => {
     const { email , password } = req.body;
-    const user = await Admin.findOne({ email});
+    const user = await SuperUser.findOne({ email});
     console.log(user)
     if (user && user.password == password) {
       const token = jwt.sign({ email, role: 'user' }, SECRET, { expiresIn: '1h' });
@@ -321,7 +321,7 @@ const authenticateJwt = (req, res, next) => {
   app.post('/users/applydoctor', async (req,res)  => {
         
     const {firstName , lastName , phoneNumber , address  , website , email , specialization , experience , fees , timingfrom , timingto , password} = req.body ; 
-    console.log(experience)
+   
     const admin = await Admin.findOne({email}) ; 
     if(admin) {
           res.json({message : 'doctor already exist with this email'})
